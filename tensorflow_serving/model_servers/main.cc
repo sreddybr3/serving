@@ -268,6 +268,23 @@ class PredictionServiceImpl final : public PredictionService::Service {
     return status;
   }
 
+  grpc::Status UpdateModelConfig(ServerContext* context,
+                                const UpdateModelConfigRequest* request,
+                                UpdateModelConfigResponse* response) override {
+    if (!use_saved_model_) {
+      return ToGRPCStatus(tensorflow::errors::InvalidArgument(
+          "UpdateModelConfig API is only available when use_saved_model is "
+          "set to true"));
+    }
+    const grpc::Status status =
+        ToGRPCStatus(UpdateModelConfigImpl::UpdateModelConfig(
+            core_.get(), *request, response));
+    if (!status.ok()) {
+      VLOG(1) << "UpdateModelConfig failed: " << status.error_message();
+    }
+    return status;
+  }
+
  private:
   std::unique_ptr<ServerCore> core_;
   std::unique_ptr<TensorflowPredictor> predictor_;

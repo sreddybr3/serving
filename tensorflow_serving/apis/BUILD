@@ -239,6 +239,29 @@ serving_proto_library_py(
     ],
 )
 
+serving_proto_library(
+    name = "model_config_proto",
+    srcs = ["model_config.proto"],
+    cc_api_version = 2,
+    go_api_version = 2,
+    java_api_version = 2,
+    deps = [
+        ":model_proto",
+        "@org_tensorflow//tensorflow/core:protos_all_cc",
+        "@protobuf_archive//:cc_wkt_protos",
+    ],
+)
+
+serving_proto_library_py(
+    name = "model_config_proto_py_pb2",
+    srcs = ["model_config.proto"],
+    proto_library = "model_config_proto",
+    deps = [
+        ":model_proto_py_pb2",
+        "@org_tensorflow//tensorflow/core:protos_all_py",
+    ],
+)
+
 tf_pyclif_proto_library(
     name = "regression_pyclif",
     proto_lib = ":regression_proto",
