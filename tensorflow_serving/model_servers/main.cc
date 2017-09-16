@@ -76,6 +76,7 @@ limitations under the License.
 #include "tensorflow_serving/servables/tensorflow/multi_inference.h"
 #include "tensorflow_serving/servables/tensorflow/predict_impl.h"
 #include "tensorflow_serving/servables/tensorflow/regression_service.h"
+#include "tensorflow_serving/servables/tensorflow/update_model_config_impl.h"
 
 namespace grpc {
 class ServerCompletionQueue;
@@ -97,6 +98,7 @@ using tensorflow::serving::TensorflowRegressionServiceImpl;
 using tensorflow::serving::TensorflowPredictor;
 using tensorflow::serving::UniquePtrWithDeps;
 using tensorflow::string;
+using tensorflow::serving::UpdateModelConfigImpl;
 
 using grpc::InsecureServerCredentials;
 using grpc::Server;
@@ -113,6 +115,8 @@ using tensorflow::serving::PredictResponse;
 using tensorflow::serving::RegressionRequest;
 using tensorflow::serving::RegressionResponse;
 using tensorflow::serving::PredictionService;
+using tensorflow::serving::UpdateModelConfigRequest;
+using tensorflow::serving::UpdateModelConfigResponse;
 
 namespace {
 
