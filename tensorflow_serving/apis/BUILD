@@ -148,7 +148,7 @@ py_library(
         ":inference_proto_py_pb2",
         ":predict_proto_py_pb2",
         ":regression_proto_py_pb2",
-        ":model_config_proto",
+        ":model_config_proto_py_pb2",
     ],
 )
 
