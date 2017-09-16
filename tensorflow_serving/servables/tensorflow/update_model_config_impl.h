@@ -16,7 +16,33 @@ limitations under the License.
 #ifndef TENSORFLOW_SERVING_SERVABLES_TENSORFLOW_UPDATE_MODEL_CONFIG_IMPL_H_
 #define TENSORFLOW_SERVING_SERVABLES_TENSORFLOW_UPDATE_MODEL_CONFIG_IMPL_H_
 
+#include <limits>
+#include <map>
+#include <memory>
+#include <string>
+#include <utility>
+
+#include "google/protobuf/any.pb.h"
 #include "tensorflow/core/lib/core/status.h"
+#include "tensorflow/core/platform/macros.h"
+#include "tensorflow/core/platform/mutex.h"
+#include "tensorflow/core/platform/types.h"
+#include "tensorflow_serving/apis/model.pb.h"
+#include "tensorflow_serving/config/logging_config.pb.h"
+#include "tensorflow_serving/config/model_server_config.pb.h"
+#include "tensorflow_serving/config/platform_config.pb.h"
+#include "tensorflow_serving/core/aspired_versions_manager.h"
+#include "tensorflow_serving/core/dynamic_source_router.h"
+#include "tensorflow_serving/core/servable_state_monitor.h"
+#include "tensorflow_serving/core/server_request_logger.h"
+#include "tensorflow_serving/core/source.h"
+#include "tensorflow_serving/core/source_adapter.h"
+#include "tensorflow_serving/core/storage_path.h"
+#include "tensorflow_serving/sources/storage_path/file_system_storage_path_source.h"
+#include "tensorflow_serving/util/event_bus.h"
+#include "tensorflow_serving/util/optional.h"
+#include "tensorflow_serving/util/unique_ptr_with_deps.h"
+
 #include "tensorflow_serving/apis/model_config.pb.h"
 #include "tensorflow_serving/model_servers/server_core.h"
 
