@@ -13,7 +13,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ==============================================================================*/
 
-#include "tensorflow_serving/servables/tensorflow/update_model_config_impl.h"
+#include "tensorflow_serving/servables/tensorflow/get_model_status_impl.h"
 
 #include <map>
 #include <memory>
@@ -31,21 +31,15 @@ namespace tensorflow {
 namespace serving {
 
 
-Status UpdateModelConfigImpl::UpdateModelConfig(
-    ServerCore* core, const UpdateModelConfigRequest& request,
-    UpdateModelConfigResponse* response) {
+Status GetModelStatusImpl::GetModelStatus(
+    ServerCore* core, const GetModelStatusRequest& request,
+    GetModelStatusResponse* response) {
 
-/*
-  ProtoType proto;
-  if (tensorflow::protobuf::TextFormat::ParseFromString(request->get_config_list(),
-                                                        &proto)) {
-      response->set_config_update_response('Error: cannot parse model config from the input string');
-  } else {
-    response->set_config_update_response('Invalid model config: cannot parse the model config');
-  } */
 
   std::string prefix("HelloModel ");
-  response->set_config_update_response(prefix);
+  auto model_spec = response->mutable_model_spec();
+  model_spec->set_name(prefix);
+  response->set_model_status(prefix);
 
   
   return tensorflow::Status::OK();
