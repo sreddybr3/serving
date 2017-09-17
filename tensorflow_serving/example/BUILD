@@ -91,9 +91,9 @@ cc_binary(
 )
 
 py_binary(
-    name = "model_status_client",
+    name = "model_config_client",
     srcs = [
-        "model_status_client.py",
+        "model_config_client.py",
     ],
     srcs_version = "PY2AND3",
     deps = [
