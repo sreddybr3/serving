@@ -56,11 +56,11 @@ Status UpdateModelConfigImpl::UpdateModelConfig(
   ModelServerConfig proto;
   if (tensorflow::protobuf::TextFormat::ParseFromString(request->get_config_list(),
                                                         &proto)) {
-    response->set_config_update_response('Success: parse model config from the input string');
-    LOG(INFO) << "Success: parse model config from the input string ";
+    response->set_config_update_response("Success: parse model config from the input string");
+    //LOG(INFO) << "Success: parse model config from the input string ";
   } else {
-    response->set_config_update_response('Invalid model config: cannot parse the model config');
-    LOG(INFO) << "Invalid model config: cannot parse the model config";
+    response->set_config_update_response("Invalid model config: cannot parse the model config");
+    //LOG(INFO) << "Invalid model config: cannot parse the model config";
   } 
  
   std::string str;
