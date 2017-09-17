@@ -40,7 +40,18 @@ def main(_):
   channel = implementations.insecure_channel(host, int(port))
   stub = prediction_service_pb2.beta_create_PredictionService_stub(channel)
   request =  model_config_pb2.UpdateModelConfigRequest()
-  request.config_list = 'inception'
+  request.config_list = """ model_config_list: {
+                            config: {
+                            name: "model1",
+                            base_path: "/serving/models/model1",
+                            model_platform: "tensorflow"
+                            },
+                            config: {
+                            name: "model2",
+                            base_path: "/serving/models/model2",
+                            model_platform: "tensorflow"
+                            }
+                            }"""
   print(request)
   result = stub.UpdateModelConfig(request, 30.0)  # 10 secs timeout
   print(result)
