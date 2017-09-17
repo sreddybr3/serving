@@ -32,6 +32,7 @@ from tensorflow_serving.apis import prediction_service_pb2
 tf.app.flags.DEFINE_string('server', 'localhost:9000',
                            'PredictionService host:port')
 tf.app.flags.DEFINE_string('image', '', 'path to image in JPEG format')
+tf.app.flags.DEFINE_string('model', '', 'inception')
 FLAGS = tf.app.flags.FLAGS
 
 
@@ -44,7 +45,7 @@ def main(_):
     # See prediction_service.proto for gRPC request/response details.
     data = f.read()
     request = predict_pb2.PredictRequest()
-    request.model_spec.name = 'inception'
+    request.model_spec.name = FLAGS.model
     request.model_spec.signature_name = 'predict_images'
     request.inputs['images'].CopyFrom(
         tf.contrib.util.make_tensor_proto(data, shape=[1]))

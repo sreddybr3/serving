@@ -67,6 +67,10 @@ Status UpdateModelConfigImpl::UpdateModelConfig(
   google::protobuf::TextFormat::PrintToString(proto, &str);
   LOG(INFO) << "GOT BACK CONFIG STRING" << str.c_str();
   
+  LOG(INFO) << "Rewquest to reload model config list";
+  const Status reconfigure_status = core->ReloadConfig(proto);
+  LOG(INFO) << "Reload model config list with status: " << reconfigure_status.ToString();
+
   return tensorflow::Status::OK();
 
 
