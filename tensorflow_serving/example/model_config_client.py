@@ -42,13 +42,13 @@ def main(_):
   request =  model_config_pb2.UpdateModelConfigRequest()
   request.config_list = """ model_config_list: {
                             config: {
-                            name: "model1",
-                            base_path: "/serving/models/model1",
+                            name: "inception",
+                            base_path: "//serving/inception",
                             model_platform: "tensorflow"
                             },
                             config: {
-                            name: "model2",
-                            base_path: "/serving/models/model2",
+                            name: "inception2",
+                            base_path: "//serving/inception2",
                             model_platform: "tensorflow"
                             }
                             }"""
