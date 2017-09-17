@@ -99,7 +99,7 @@ py_binary(
     deps = [
         "//tensorflow_serving/apis:predict_proto_py_pb2",
         "//tensorflow_serving/apis:prediction_service_proto_py_pb2",
-        "//tensorflow_serving/apis:model_config_py_pb2",
+        "//tensorflow_serving/apis:model_config_proto_py_pb2",
         "@org_tensorflow//tensorflow:tensorflow_py",
     ],
 )
