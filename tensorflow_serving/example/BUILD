@@ -89,3 +89,17 @@ cc_binary(
         "@protobuf_archive//:protobuf_lite",
     ],
 )
+
+py_binary(
+    name = "model_status_client",
+    srcs = [
+        "model_status_client.py",
+    ],
+    srcs_version = "PY2AND3",
+    deps = [
+        "//tensorflow_serving/apis:predict_proto_py_pb2",
+        "//tensorflow_serving/apis:prediction_service_proto_py_pb2",
+        "//tensorflow_serving/apis:model_config_py_pb2",
+        "@org_tensorflow//tensorflow:tensorflow_py",
+    ],
+)
