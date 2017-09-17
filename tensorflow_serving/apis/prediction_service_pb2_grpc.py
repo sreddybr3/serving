@@ -3,8 +3,8 @@ import grpc
 
 from tensorflow_serving.apis import classification_pb2 as tensorflow__serving_dot_apis_dot_classification__pb2
 from tensorflow_serving.apis import get_model_metadata_pb2 as tensorflow__serving_dot_apis_dot_get__model__metadata__pb2
-from tensorflow_serving.apis import get_model_status_pb2 as tensorflow__serving_dot_apis_dot_get__model__status__pb2
 from tensorflow_serving.apis import inference_pb2 as tensorflow__serving_dot_apis_dot_inference__pb2
+from tensorflow_serving.apis import model_config_pb2 as tensorflow__serving_dot_apis_dot_model__config__pb2
 from tensorflow_serving.apis import predict_pb2 as tensorflow__serving_dot_apis_dot_predict__pb2
 from tensorflow_serving.apis import regression_pb2 as tensorflow__serving_dot_apis_dot_regression__pb2
 
@@ -46,10 +46,10 @@ class PredictionServiceStub(object):
         request_serializer=tensorflow__serving_dot_apis_dot_get__model__metadata__pb2.GetModelMetadataRequest.SerializeToString,
         response_deserializer=tensorflow__serving_dot_apis_dot_get__model__metadata__pb2.GetModelMetadataResponse.FromString,
         )
-    self.GetModelStatus = channel.unary_unary(
-        '/tensorflow.serving.PredictionService/GetModelStatus',
-        request_serializer=tensorflow__serving_dot_apis_dot_get__model__status__pb2.GetModelStatusRequest.SerializeToString,
-        response_deserializer=tensorflow__serving_dot_apis_dot_get__model__status__pb2.GetModelStatusResponse.FromString,
+    self.UpdateModelConfig = channel.unary_unary(
+        '/tensorflow.serving.PredictionService/UpdateModelConfig',
+        request_serializer=tensorflow__serving_dot_apis_dot_model__config__pb2.UpdateModelConfigRequest.SerializeToString,
+        response_deserializer=tensorflow__serving_dot_apis_dot_model__config__pb2.UpdateModelConfigResponse.FromString,
         )
 
 
@@ -94,9 +94,9 @@ class PredictionServiceServicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
-  def GetModelStatus(self, request, context):
-    # missing associated documentation comment in .proto file
-    pass
+  def UpdateModelConfig(self, request, context):
+    """UpdateModelConfig - dynamically update the model config list
+    """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
@@ -129,10 +129,10 @@ def add_PredictionServiceServicer_to_server(servicer, server):
           request_deserializer=tensorflow__serving_dot_apis_dot_get__model__metadata__pb2.GetModelMetadataRequest.FromString,
           response_serializer=tensorflow__serving_dot_apis_dot_get__model__metadata__pb2.GetModelMetadataResponse.SerializeToString,
       ),
-      'GetModelStatus': grpc.unary_unary_rpc_method_handler(
-          servicer.GetModelStatus,
-          request_deserializer=tensorflow__serving_dot_apis_dot_get__model__status__pb2.GetModelStatusRequest.FromString,
-          response_serializer=tensorflow__serving_dot_apis_dot_get__model__status__pb2.GetModelStatusResponse.SerializeToString,
+      'UpdateModelConfig': grpc.unary_unary_rpc_method_handler(
+          servicer.UpdateModelConfig,
+          request_deserializer=tensorflow__serving_dot_apis_dot_model__config__pb2.UpdateModelConfigRequest.FromString,
+          response_serializer=tensorflow__serving_dot_apis_dot_model__config__pb2.UpdateModelConfigResponse.SerializeToString,
       ),
   }
   generic_handler = grpc.method_handlers_generic_handler(
