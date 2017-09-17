@@ -27,6 +27,23 @@ limitations under the License.
 #include "tensorflow/core/lib/core/errors.h"
 #include "tensorflow_serving/core/servable_handle.h"
 
+#include "tensorflow_serving/model_servers/server_core.h"
+
+#include "google/protobuf/any.pb.h"
+#include "google/protobuf/wrappers.pb.h"
+#include "tensorflow/core/lib/core/stringpiece.h"
+#include "tensorflow/core/lib/io/path.h"
+#include "tensorflow/core/platform/logging.h"
+#include "tensorflow_serving/core/load_servables_fast.h"
+#include "tensorflow_serving/model_servers/model_platform_types.h"
+#include "tensorflow_serving/resources/resource_values.h"
+#include "tensorflow_serving/servables/tensorflow/saved_model_bundle_source_adapter.h"
+#include "tensorflow_serving/servables/tensorflow/session_bundle_source_adapter.h"
+#include "tensorflow_serving/servables/tensorflow/session_bundle_source_adapter.pb.h"
+#include "tensorflow_serving/sources/storage_path/file_system_storage_path_source.h"
+#include "tensorflow_serving/sources/storage_path/file_system_storage_path_source.pb.h"
+#include "tensorflow_serving/config/model_server_config.pb.h"
+
 namespace tensorflow {
 namespace serving {
 
@@ -35,18 +52,20 @@ Status UpdateModelConfigImpl::UpdateModelConfig(
     ServerCore* core, const UpdateModelConfigRequest& request,
     UpdateModelConfigResponse* response) {
 
-/*
-  ProtoType proto;
+
+  ModelServerConfig proto;
   if (tensorflow::protobuf::TextFormat::ParseFromString(request->get_config_list(),
                                                         &proto)) {
-      response->set_config_update_response('Error: cannot parse model config from the input string');
+    response->set_config_update_response('Success: parse model config from the input string');
+    LOG(INFO) << "Success: parse model config from the input string ";
   } else {
     response->set_config_update_response('Invalid model config: cannot parse the model config');
-  } */
-
-  std::string prefix("HelloModel ");
-  response->set_config_update_response(prefix);
-
+    LOG(INFO) << "Invalid model config: cannot parse the model config";
+  } 
+ 
+  std::string str;
+  google::protobuf::TextFormat::PrintToString(proto, &str);
+  LOG(INFO) << "GOT BACK CONFIG STRING" << str.c_str();
   
   return tensorflow::Status::OK();
 
