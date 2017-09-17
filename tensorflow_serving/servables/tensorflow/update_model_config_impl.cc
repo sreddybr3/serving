@@ -54,7 +54,7 @@ Status UpdateModelConfigImpl::UpdateModelConfig(
 
 
   ModelServerConfig proto;
-  if (tensorflow::protobuf::TextFormat::ParseFromString(request->get_config_list(),
+  if (tensorflow::protobuf::TextFormat::ParseFromString(request->mutable_config_list(),
                                                         &proto)) {
     response->set_config_update_response("Success: parse model config from the input string");
     //LOG(INFO) << "Success: parse model config from the input string ";
