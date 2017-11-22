@@ -25,6 +25,7 @@ from __future__ import print_function
 from grpc.beta import implementations
 import tensorflow as tf
 
+#from tensorflow_serving.apis.model_config_pb2 import UpdateModelConfigRequest
 from tensorflow_serving.apis import model_config_pb2
 from tensorflow_serving.apis import prediction_service_pb2
 
@@ -43,12 +44,12 @@ def main(_):
   request.config_list = """ model_config_list: {
                             config: {
                             name: "inception",
-                            base_path: "//serving/inception",
+                            base_path: "/test/inception",
                             model_platform: "tensorflow"
                             },
                             config: {
-                            name: "inception2",
-                            base_path: "//serving/inception2",
+                            name: "mnist",
+                            base_path: "/test/mnist",
                             model_platform: "tensorflow"
                             }
                             }"""
